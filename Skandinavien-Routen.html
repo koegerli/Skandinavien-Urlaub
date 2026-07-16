@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skandinavien mit dem Wohnmobil – 5 Routen zur Auswahl</title>
+<style>
+  :root{
+    --fjord:#0b3d5c; --fjord2:#125a86; --ice:#e8f1f6; --snow:#f7fafc;
+    --sun:#f0a500; --moss:#2e7d5b; --ink:#1a2733; --muted:#5b6b78;
+    --card:#ffffff; --line:#dbe6ee;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--ice); line-height:1.6;
+  }
+  a{color:var(--fjord2);}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+
+  /* Hero */
+  header.hero{
+    background:linear-gradient(135deg,var(--fjord) 0%,var(--fjord2) 60%,var(--moss) 130%);
+    color:#fff; padding:60px 20px 70px; text-align:center;
+  }
+  header.hero h1{font-size:2.4rem; margin:0 0 10px; letter-spacing:.5px;}
+  header.hero p{font-size:1.15rem; margin:6px 0; opacity:.95;}
+  .badge-row{margin-top:22px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+  .badge{background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.35);
+    padding:6px 14px; border-radius:999px; font-size:.9rem;}
+
+  /* Profile recap */
+  .profile{background:var(--snow); border:1px solid var(--line); border-radius:16px;
+    padding:22px 26px; margin:-40px auto 40px; box-shadow:0 10px 30px rgba(11,61,92,.12); position:relative;}
+  .profile h2{margin:0 0 12px; color:var(--fjord); font-size:1.2rem;}
+  .profile ul{margin:0; padding-left:18px; columns:2; column-gap:32px;}
+  .profile li{margin:4px 0; break-inside:avoid;}
+
+  /* Route cards */
+  .route{background:var(--card); border:1px solid var(--line); border-radius:18px;
+    overflow:hidden; margin:34px 0; box-shadow:0 6px 22px rgba(11,61,92,.08);}
+  .route .imgs{display:grid; grid-template-columns:2fr 1fr; gap:2px; background:var(--line);}
+  .route .imgs figure{margin:0; position:relative; background:#cdd9e1;}
+  .route .imgs img{display:block; width:100%; height:260px; object-fit:cover;}
+  .route .imgs figure.small img{height:260px;}
+  .route .imgs figcaption{position:absolute; bottom:0; left:0; right:0;
+    font-size:.7rem; color:#fff; background:linear-gradient(transparent,rgba(0,0,0,.6));
+    padding:14px 8px 4px; text-align:right;}
+  .route .imgs figcaption a{color:#dbeafe;}
+  .route .body{padding:24px 28px 28px;}
+  .route .tag{display:inline-block; background:var(--ice); color:var(--fjord2);
+    font-size:.78rem; font-weight:600; padding:4px 12px; border-radius:999px; margin-bottom:10px;
+    text-transform:uppercase; letter-spacing:.5px;}
+  .route h3{margin:4px 0 6px; font-size:1.5rem; color:var(--fjord);}
+  .route .sub{color:var(--muted); font-style:italic; margin:0 0 14px;}
+  .route .lead{margin:0 0 16px;}
+  .cols{display:grid; grid-template-columns:1fr 260px;
+    grid-template-areas:"hl map" "why map"; gap:16px 24px; align-items:start;}
+  .cols > div:nth-child(1){grid-area:hl;}
+  .cols > div:nth-child(2){grid-area:why;}
+  .cols > .mapcol{grid-area:map;}
+  .mapcol .maplabel{margin:0 0 8px;}
+  .cols h4{margin:0 0 8px; font-size:.95rem; color:var(--moss); text-transform:uppercase; letter-spacing:.4px;}
+  .hl{list-style:none; padding:0; margin:0;}
+  .hl li{padding:3px 0 3px 26px; position:relative;}
+  .hl li::before{content:""; position:absolute; left:0; top:9px; width:9px; height:9px;
+    background:var(--sun); border-radius:50%;}
+  .note{background:#fff7e6; border-left:4px solid var(--sun); padding:10px 14px; border-radius:8px;
+    margin-top:16px; font-size:.92rem;}
+  .links{margin-top:18px; display:flex; flex-wrap:wrap; gap:10px;}
+  .links a{background:var(--fjord); color:#fff; text-decoration:none; font-size:.85rem;
+    padding:8px 14px; border-radius:10px; transition:background .15s;}
+  .links a:hover{background:var(--fjord2);}
+  .links a.ghost{background:#fff; color:var(--fjord); border:1px solid var(--fjord);}
+
+  /* comparison table */
+  .compare{background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:8px 8px 4px; margin:40px 0; overflow-x:auto;}
+  table{border-collapse:collapse; width:100%; min-width:640px;}
+  th,td{padding:11px 12px; text-align:left; border-bottom:1px solid var(--line); font-size:.9rem;}
+  th{background:var(--fjord); color:#fff; position:sticky; top:0;}
+  tbody tr:nth-child(even){background:var(--snow);}
+  .stars{color:var(--sun); letter-spacing:2px;}
+
+  /* decision box */
+  .decision{background:linear-gradient(135deg,#e8f1f6,#f7fafc); border:2px dashed var(--fjord2);
+    border-radius:16px; padding:26px 28px; margin:40px 0;}
+  .decision h2{margin-top:0; color:var(--fjord);}
+  .vote{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
+  .vote div{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px;}
+  .vote strong{color:var(--fjord2);}
+  .vote .lines{color:var(--muted); border-bottom:1px dotted #aaa; height:1.6em; margin-top:6px;}
+
+  footer{text-align:center; color:var(--muted); font-size:.82rem; padding:30px 20px 50px;}
+  h2.section{color:var(--fjord); text-align:center; margin:46px 0 6px; font-size:1.6rem;}
+  p.section-sub{text-align:center; color:var(--muted); margin:0 0 10px;}
+
+  @media(max-width:720px){
+    .profile ul{columns:1;}
+    .route .imgs{grid-template-columns:1fr;}
+    .cols{grid-template-columns:1fr; grid-template-areas:"hl" "why" "map";}
+    .vote{grid-template-columns:1fr;}
+    header.hero h1{font-size:1.8rem;}
+  }
+  /* route maps */
+  .maplabel{margin:18px 0 6px; font-size:.95rem; color:var(--moss); text-transform:uppercase; letter-spacing:.4px;}
+  .routemap{width:100%; height:440px; margin:0; border-radius:12px; overflow:hidden; border:1px solid var(--line); z-index:0;}
+  .leaflet-container{background:#dfeaf1;}
+  .maptip{background:var(--fjord); color:#fff; border:none; border-radius:6px;
+    font-size:.72rem; font-weight:600; padding:2px 7px; box-shadow:0 2px 6px rgba(0,0,0,.25);}
+  .maptip::before{display:none;}
+  .maptip.start{background:var(--sun); color:#3a2a00;}
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>🚐 Skandinavien mit dem Wohnmobil</h1>
+    <p>Fünf Routen zur Auswahl – für unsere 2-Wochen-Reise in den Norden</p>
+    <p style="font-size:.95rem;opacity:.85;">Zum gemeinsamen Stöbern &amp; Entscheiden 💛</p>
+    <div class="badge-row">
+      <span class="badge">✈️ Flug + Wohnmobil vor Ort</span>
+      <span class="badge">🥾 Natur &amp; Wandern</span>
+      <span class="badge">🏙️ mit urbaner Abwechslung</span>
+      <span class="badge">🐢 gemütliches Tempo</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="profile">
+    <h2>Unser Reiseprofil auf einen Blick</h2>
+    <ul>
+      <li>👫 Paar um die 30, keine Kinder/Haustiere</li>
+      <li>🏠 Start: Region Olten → Flug in den Norden</li>
+      <li>🚐 Wohnmobil (bis 3,5 t) vor Ort gemietet</li>
+      <li>📅 max. 2 Wochen · nicht zu kalt · außerhalb Schulferien</li>
+      <li>🥾 Wandern gemütlich–moderat (keine Ganztagstouren)</li>
+      <li>🚿 gepflegte Campingplätze mit gutem Sanitär</li>
+      <li>⛴️ Fähren (kurz &amp; lang) sind okay</li>
+      <li>🍽️ selbst kochen + lokale Küche probieren</li>
+      <li>🛣️ enge Bergstraßen kein Problem</li>
+      <li>🐢 mal 1 Nacht, mal 2–3 Nächte, &lt; ~3 Std. Fahrt/Tag</li>
+    </ul>
+  </section>
+
+  <h2 class="section">Die fünf Routen im Überblick</h2>
+  <p class="section-sub">Jede führt durch eine ganz andere Ecke Skandinaviens.</p>
+
+  <!-- ROUTE 1 -->
+  <article class="route">
+    <div class="imgs">
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Lyse_Fjord_et_Preikestolen.jpg/1280px-Lyse_Fjord_et_Preikestolen.jpg" alt="Preikestolen über dem Lysefjord">
+        <figcaption>Preikestolen · <a href="https://commons.wikimedia.org/wiki/File:Lyse_Fjord_et_Preikestolen.jpg">Wikimedia</a></figcaption>
+      </figure>
+      <figure class="small">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Bergen_panorama_at_night_-_panoramio_%281%29.jpg/1280px-Bergen_panorama_at_night_-_panoramio_%281%29.jpg" alt="Bergen bei Nacht">
+        <figcaption>Bergen · <a href="https://commons.wikimedia.org/wiki/File:Bergen_panorama_at_night_-_panoramio_(1).jpg">Wikimedia</a></figcaption>
+      </figure>
+    </div>
+    <div class="body">
+      <span class="tag">Route 1 · Westnorwegen</span>
+      <h3>Das klassische Fjordland – ab Bergen</h3>
+      <p class="sub">Das „Best of" der Fjorde, kompakt und abwechslungsreich.</p>
+      <p class="lead">Die Postkarten-Version Norwegens: tiefe Fjorde, tosende Wasserfälle und mit Bergen eine der schönsten Städte des Landes. Ihr kennt die Region vom Kreuzfahrtschiff – jetzt erlebt ihr sie von der Landseite, frei und individuell.</p>
+      <div class="cols">
+        <div>
+          <h4>Highlights</h4>
+          <ul class="hl">
+            <li><strong>Bergen</strong> – bunte Hansehäuser, Fischmarkt, Fløibanen-Standseilbahn</li>
+            <li><strong>Hardangerfjord</strong> – Obstblüte &amp; Wasserfall Vøringsfossen</li>
+            <li><strong>Preikestolen</strong> – berühmte Felskanzel, ~4 h moderat</li>
+            <li><strong>Nærøyfjord</strong> (UNESCO) &amp; die <strong>Flåmbahn</strong></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Warum es passt</h4>
+          <ul class="hl">
+            <li>Perfekte Mischung Natur + Stadt</li>
+            <li>Wanderungen in jeder Länge verfügbar</li>
+            <li>Kompakte Rundtour, wenig „Leerfahrt"</li>
+            <li>Bekannte Ecke neu entdeckt</li>
+          </ul>
+        </div>
+        <div class="mapcol">
+          <h4 class="maplabel">🗺️ Routenverlauf</h4>
+          <div class="routemap" id="map1"></div>
+        </div>
+      </div>
+      <div class="note">💡 Einsteigerfreundlich &amp; landschaftlich dicht – der „sichere" Klassiker mit hohem Wow-Faktor.</div>
+      <div class="links">
+        <a href="https://www.visitnorway.de/reiseziele/fjordnorwegen/">Fjordnorwegen (VisitNorway)</a>
+        <a href="https://en.wikipedia.org/wiki/Preikestolen" class="ghost">Preikestolen (Wikipedia)</a>
+        <a href="https://www.visitbergen.com/" class="ghost">Visit Bergen</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- ROUTE 2 -->
+  <article class="route">
+    <div class="imgs">
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Geirangerfjord_.jpg/1280px-Geirangerfjord_.jpg" alt="Geirangerfjord">
+        <figcaption>Geirangerfjord · <a href="https://commons.wikimedia.org/wiki/File:Geirangerfjord_.jpg">Wikimedia</a></figcaption>
+      </figure>
+      <figure class="small">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/DSC07845-Panorama.jpg/1280px-DSC07845-Panorama.jpg" alt="Trollstigen Serpentinen">
+        <figcaption>Trollstigen · <a href="https://commons.wikimedia.org/wiki/File:DSC07845-Panorama.jpg">Wikimedia</a></figcaption>
+      </figure>
+    </div>
+    <div class="body">
+      <span class="tag">Route 2 · Mittelnorwegen</span>
+      <h3>Serpentinen, Atlantik &amp; Jugendstil – ab Ålesund</h3>
+      <p class="sub">Die spektakulärsten Straßen Norwegens.</p>
+      <p class="lead">Diese Route lebt vom Fahren selbst: kühne Serpentinen, eine Brückenstraße mitten übers Meer und der berühmteste Fjord des Landes – kombiniert mit der Jugendstilstadt Ålesund und dem lebhaften Trondheim.</p>
+      <div class="cols">
+        <div>
+          <h4>Highlights</h4>
+          <ul class="hl">
+            <li><strong>Geirangerfjord</strong> (UNESCO) – der berühmteste Fjord</li>
+            <li><strong>Trollstigen</strong> – legendäre Serpentinenstraße</li>
+            <li><strong>Atlantikstraße</strong> – Brückenstraße übers offene Meer</li>
+            <li><strong>Ålesund</strong> (Jugendstil) &amp; <strong>Trondheim</strong> (Nidarosdom)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Warum es passt</h4>
+          <ul class="hl">
+            <li>Enge Bergstraßen sind für euch kein Problem</li>
+            <li>Fahren wird selbst zum Erlebnis</li>
+            <li>Zwei charmante Städte als Kontrast</li>
+            <li>Kürzere Distanzen, viele Fährchen</li>
+          </ul>
+        </div>
+        <div class="mapcol">
+          <h4 class="maplabel">🗺️ Routenverlauf</h4>
+          <div class="routemap" id="map2"></div>
+        </div>
+      </div>
+      <div class="note">⚠️ Trollstigen ist saisonal (meist ~Mai/Juni–Oktober geöffnet) – Zeitraum darauf abstimmen.</div>
+      <div class="links">
+        <a href="https://www.visitnorway.de/reiseziele/fjordnorwegen/nordwesten/">Nordwesten (VisitNorway)</a>
+        <a href="https://en.wikipedia.org/wiki/Atlantic_Ocean_Road" class="ghost">Atlantikstraße (Wikipedia)</a>
+        <a href="https://en.wikipedia.org/wiki/Geirangerfjord" class="ghost">Geirangerfjord (Wikipedia)</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- ROUTE 3 -->
+  <article class="route">
+    <div class="imgs">
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg/1280px-Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg" alt="Lofoten, Blick vom Reinebringen">
+        <figcaption>Lofoten (Reinebringen) · <a href="https://commons.wikimedia.org/wiki/File:Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg">Wikimedia</a></figcaption>
+      </figure>
+      <figure class="small">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Troms%C3%B8_sentrum_%285835702754%29.jpg/1280px-Troms%C3%B8_sentrum_%285835702754%29.jpg" alt="Tromsø Zentrum">
+        <figcaption>Tromsø · <a href="https://commons.wikimedia.org/wiki/File:Troms%C3%B8_sentrum_(5835702754).jpg">Wikimedia</a></figcaption>
+      </figure>
+    </div>
+    <div class="body">
+      <span class="tag">Route 3 · Nordnorwegen</span>
+      <h3>Lofoten &amp; Arktis – ab Tromsø / Bodø</h3>
+      <p class="sub">Zackige Gipfel, weiße Strände, Fischerdörfer.</p>
+      <p class="lead">Der dramatischste Norden: nadelscharfe Berge, die direkt aus dem Meer ragen, karibisch weiße Strände und rote Fischerhütten. Im Sommer geht die Sonne nicht unter – Wandern um Mitternacht inklusive.</p>
+      <div class="cols">
+        <div>
+          <h4>Highlights</h4>
+          <ul class="hl">
+            <li><strong>Lofoten</strong> – Reine, Henningsvær, Bergwanderungen</li>
+            <li><strong>Traumstrände</strong> Haukland &amp; Kvalvika (mit Wanderung)</li>
+            <li><strong>Tromsø</strong> – „Paris des Nordens", arktische Kultur</li>
+            <li><strong>Mitternachtssonne</strong> im Hochsommer</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Warum es passt</h4>
+          <ul class="hl">
+            <li>Landschaftlich am spektakulärsten</li>
+            <li>Im Sommer mild (~12–17 °C), lange hell</li>
+            <li>Wandern &amp; Strand direkt kombiniert</li>
+            <li>Weniger überlaufen als die Südfjorde</li>
+          </ul>
+        </div>
+        <div class="mapcol">
+          <h4 class="maplabel">🗺️ Routenverlauf</h4>
+          <div class="routemap" id="map3"></div>
+        </div>
+      </div>
+      <div class="note">⚠️ Weiteste Anreise (Flug mit Umstieg) &amp; größere Distanzen vor Ort – etwas mehr Fahrzeit einplanen. Am besten Hochsommer wegen Wärme &amp; Licht.</div>
+      <div class="links">
+        <a href="https://www.visitnorway.de/reiseziele/nordnorwegen/lofoten/">Lofoten (VisitNorway)</a>
+        <a href="https://en.wikipedia.org/wiki/Lofoten" class="ghost">Lofoten (Wikipedia)</a>
+        <a href="https://www.visittromso.no/en" class="ghost">Visit Tromsø</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- ROUTE 4 -->
+  <article class="route">
+    <div class="imgs">
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Nationaltheatret_evening.jpg/1280px-Nationaltheatret_evening.jpg" alt="Oslo am Abend">
+        <figcaption>Oslo · <a href="https://commons.wikimedia.org/wiki/File:Nationaltheatret_evening.jpg">Wikimedia</a></figcaption>
+      </figure>
+      <figure class="small">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Lyse_Fjord_et_Preikestolen.jpg/1280px-Lyse_Fjord_et_Preikestolen.jpg" alt="Südnorwegische Natur" style="filter:saturate(1.05)">
+        <figcaption>Fjell &amp; Fjord · <a href="https://commons.wikimedia.org/wiki/File:Lyse_Fjord_et_Preikestolen.jpg">Wikimedia</a></figcaption>
+      </figure>
+    </div>
+    <div class="body">
+      <span class="tag">Route 4 · Südnorwegen</span>
+      <h3>Telemark &amp; Sørlandet – ab Oslo</h3>
+      <p class="sub">Mildestes Klima, entspanntestes Fahren.</p>
+      <p class="lead">Die sanfte, einsteigerfreundliche Variante: lebendige Hauptstadt, liebliche Seenlandschaft und idyllische weiße Küstenstädtchen. Kürzere, gut ausgebaute Strecken und das wärmste Wetter Norwegens.</p>
+      <div class="cols">
+        <div>
+          <h4>Highlights</h4>
+          <ul class="hl">
+            <li><strong>Oslo</strong> – Oper, Fram- &amp; Munch-Museum, moderne Architektur</li>
+            <li><strong>Telemarkkanal</strong> – Schleusen, Seen, sanfte Hügel</li>
+            <li><strong>Gaustatoppen</strong> – Aussichtsberg, Blick über 1/6 Norwegens</li>
+            <li><strong>Sørlandet</strong> – weiße Küstenstädtchen (Risør, Lillesand)</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Warum es passt</h4>
+          <ul class="hl">
+            <li>Am wärmsten – ideal für „nicht zu kalt"</li>
+            <li>Am einfachsten zu fahren (Neulinge)</li>
+            <li>Viel Stadt + Kultur + sanfte Natur</li>
+            <li>Kurze Wege, entspanntes Tempo</li>
+          </ul>
+        </div>
+        <div class="mapcol">
+          <h4 class="maplabel">🗺️ Routenverlauf</h4>
+          <div class="routemap" id="map4"></div>
+        </div>
+      </div>
+      <div class="note">💡 Die entspannteste Route – etwas weniger „dramatische" Fjorde, dafür maximal stressfrei &amp; sonnig.</div>
+      <div class="links">
+        <a href="https://www.visitnorway.de/reiseziele/ostnorwegen/oslo/">Oslo (VisitNorway)</a>
+        <a href="https://en.wikipedia.org/wiki/Telemark_Canal" class="ghost">Telemarkkanal (Wikipedia)</a>
+        <a href="https://en.wikipedia.org/wiki/Gaustatoppen" class="ghost">Gaustatoppen (Wikipedia)</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- ROUTE 5 -->
+  <article class="route">
+    <div class="imgs">
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Gamla_stan_September_2014_01.jpg/1280px-Gamla_stan_September_2014_01.jpg" alt="Stockholm Gamla Stan">
+        <figcaption>Stockholm · <a href="https://commons.wikimedia.org/wiki/File:Gamla_stan_September_2014_01.jpg">Wikimedia</a></figcaption>
+      </figure>
+      <figure class="small">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/High_Coast_Bridge_2016.jpg/1280px-High_Coast_Bridge_2016.jpg" alt="Höga Kusten Brücke">
+        <figcaption>Höga Kusten · <a href="https://commons.wikimedia.org/wiki/File:High_Coast_Bridge_2016.jpg">Wikimedia</a></figcaption>
+      </figure>
+    </div>
+    <div class="body">
+      <span class="tag">Route 5 · Schweden</span>
+      <h3>Seen, Wälder &amp; Schären – ab Stockholm</h3>
+      <p class="sub">Ganz anderer Charakter: weit, grün, wasserreich.</p>
+      <p class="lead">Wer es ruhiger und „nordisch-gemütlich" mag: endlose Wälder, tausende Seen, rote Holzhäuser und eine Hauptstadt auf 14 Inseln. Flacher, milder und günstiger als Norwegen – dafür weniger schroff.</p>
+      <div class="cols">
+        <div>
+          <h4>Highlights</h4>
+          <ul class="hl">
+            <li><strong>Stockholm</strong> – Altstadt Gamla Stan, Schären, Museen</li>
+            <li><strong>Höga Kusten</strong> (UNESCO) – Steilküste &amp; Wanderwege</li>
+            <li><strong>Dalarna</strong> – rote Holzhäuser, Seenidylle</li>
+            <li>Ruhe pur &amp; <strong>Elch-/Naturbeobachtung</strong></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Warum es passt</h4>
+          <ul class="hl">
+            <li>Mildere, flachere &amp; einfachere Strecken</li>
+            <li>Preiswerter als Norwegen</li>
+            <li>Sehr viel Ruhe &amp; Natur</li>
+            <li>Lebendige Metropole als Auftakt</li>
+          </ul>
+        </div>
+        <div class="mapcol">
+          <h4 class="maplabel">🗺️ Routenverlauf</h4>
+          <div class="routemap" id="map5"></div>
+        </div>
+      </div>
+      <div class="note">💡 Die kontrastreiche Alternative zu den Fjorden – gemütlich statt spektakulär, ideal fürs Entschleunigen.</div>
+      <div class="links">
+        <a href="https://visitsweden.de/">Visit Sweden</a>
+        <a href="https://en.wikipedia.org/wiki/High_Coast" class="ghost">Höga Kusten (Wikipedia)</a>
+        <a href="https://en.wikipedia.org/wiki/Gamla_stan" class="ghost">Gamla Stan (Wikipedia)</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- COMPARISON -->
+  <h2 class="section">Direkter Vergleich</h2>
+  <p class="section-sub">Grobe Einschätzung – hilft beim Aussortieren.</p>
+  <div class="compare">
+    <table>
+      <thead>
+        <tr>
+          <th>Route</th><th>Natur-Wow</th><th>Wandern</th><th>Stadt/Kultur</th>
+          <th>Wärme</th><th>Fahr-Aufwand</th><th>Anreise</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1 · Fjordland (Bergen)</strong></td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★★☆</td><td class="stars">★★★☆☆</td><td>mittel</td><td>kurz (Direktflug)</td></tr>
+        <tr><td><strong>2 · Mittelnorwegen (Ålesund)</strong></td><td class="stars">★★★★★</td><td class="stars">★★★★☆</td><td class="stars">★★★★☆</td><td class="stars">★★★☆☆</td><td>mittel–hoch</td><td>kurz–mittel</td></tr>
+        <tr><td><strong>3 · Lofoten (Tromsø)</strong></td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td class="stars">★★★☆☆</td><td class="stars">★★☆☆☆</td><td>hoch</td><td>lang (Umstieg)</td></tr>
+        <tr><td><strong>4 · Südnorwegen (Oslo)</strong></td><td class="stars">★★★☆☆</td><td class="stars">★★★★☆</td><td class="stars">★★★★★</td><td class="stars">★★★★★</td><td>niedrig</td><td>kurz (Direktflug)</td></tr>
+        <tr><td><strong>5 · Schweden (Stockholm)</strong></td><td class="stars">★★★☆☆</td><td class="stars">★★★☆☆</td><td class="stars">★★★★★</td><td class="stars">★★★★☆</td><td>niedrig</td><td>kurz (Direktflug)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DECISION -->
+  <section class="decision">
+    <h2>🗳️ Unsere Entscheidung</h2>
+    <p>Schaut euch die Routen in Ruhe an und notiert jeweils euren Favoriten (Platz 1–2). Danach baue ich die gewählte Route <strong>Tag für Tag</strong> aus – mit konkreten Campingplätzen, Wanderungen, Fähren, Packliste und Kostenübersicht.</p>
+    <div class="vote">
+      <div>
+        <strong>Favorit Person A</strong>
+        <div class="lines"></div>
+        <div class="lines"></div>
+      </div>
+      <div>
+        <strong>Favorit Person B</strong>
+        <div class="lines"></div>
+        <div class="lines"></div>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:.9rem;color:var(--muted);">
+      Tipp: Ihr müsst euch nicht auf eine einzige festlegen – auch eine Kombination (z. B. „Fjorde + eine Stadt") ist möglich. Sagt mir einfach, was euch anspricht.
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  Erstellt als Entscheidungshilfe für unsere Wohnmobil-Reise · Bilder: Wikimedia Commons (siehe Bildnachweise) ·
+  Angaben ohne Gewähr, Details werden in der finalen Planung konkretisiert.
+</footer>
+
+<script>
+  // [Name, Lat, Lng] – erster Eintrag = Start/Ziel
+  const ROUTES = {
+    map1: { color:"#0b3d5c", loop:true, stops:[
+      ["Bergen (Start)",60.39,5.32],["Preikestolen / Stavanger",58.99,6.19],
+      ["Hardanger / Eidfjord",60.47,7.07],["Flåm & Nærøyfjord",60.86,7.11]
+    ]},
+    map2: { color:"#125a86", loop:false, stops:[
+      ["Ålesund (Start)",62.47,6.15],["Geirangerfjord",62.10,7.21],
+      ["Trollstigen / Åndalsnes",62.57,7.69],["Atlantikstraße",63.01,7.35],
+      ["Trondheim",63.43,10.39]
+    ]},
+    map3: { color:"#2e7d5b", loop:false, stops:[
+      ["Tromsø (Start)",69.65,18.96],["Narvik",68.44,17.43],
+      ["Svolvær (Lofoten)",68.23,14.57],["Reine",67.93,13.09]
+    ]},
+    map4: { color:"#c0562a", loop:true, stops:[
+      ["Oslo (Start)",59.91,10.75],["Telemark / Notodden",59.56,9.26],
+      ["Gaustatoppen / Rjukan",59.85,8.65],["Kristiansand",58.15,7.99],
+      ["Risør (Sørlandet)",58.72,9.23]
+    ]},
+    map5: { color:"#6a4c93", loop:true, stops:[
+      ["Stockholm (Start)",59.33,18.06],["Uppsala",59.86,17.64],
+      ["Dalarna / Rättvik",60.89,15.11],["Höga Kusten",62.80,17.92]
+    ]}
+  };
+
+  // Fester Ausschnitt: ganz Skandinavien – für alle Karten identisch
+  const SCAND_BOUNDS = [[57.0, 4.5], [71.2, 24.0]];
+
+  function buildMap(id, cfg){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const map = L.map(id, {
+      scrollWheelZoom:false, zoomControl:false, dragging:false,
+      doubleClickZoom:false, boxZoom:false, keyboard:false,
+      touchZoom:false, tap:false, attributionControl:true
+    });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom:18, attribution:'&copy; OpenStreetMap-Mitwirkende'
+    }).addTo(map);
+
+    const pts = cfg.stops.map(s => [s[1], s[2]]);
+    const line = cfg.loop ? pts.concat([pts[0]]) : pts;
+
+    // dezenter heller Schatten unter der Linie für bessere Sichtbarkeit
+    L.polyline(line, {color:'#ffffff', weight:7, opacity:.7}).addTo(map);
+    L.polyline(line, {color:cfg.color, weight:4, opacity:1}).addTo(map);
+
+    // nur der Startpunkt wird markiert (orange), keine Beschriftungen
+    L.circleMarker([cfg.stops[0][1], cfg.stops[0][2]], {
+      radius:7, color:'#fff', weight:2, fillColor:'#f0a500', fillOpacity:1
+    }).addTo(map);
+
+    // immer derselbe Ausschnitt
+    map.fitBounds(SCAND_BOUNDS);
+    setTimeout(() => { map.invalidateSize(); map.fitBounds(SCAND_BOUNDS); }, 200);
+  }
+
+  window.addEventListener('load', () => {
+    Object.keys(ROUTES).forEach(id => buildMap(id, ROUTES[id]));
+  });
+</script>
+</body>
+</html>
